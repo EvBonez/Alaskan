@@ -1,9 +1,11 @@
 const cardValues = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const cardSuits = ["♣️", "♦️", "♥️", "♠️"];
+const cardValueValues = [1,2,3,4,5,6,7,8,9,10,10,10,10]
 class Card{
-    constructor(value, suit) {
+    constructor(value, suit, valueValues) {
     this.value = value;
     this.suit = suit;
+    this.valueValues = valueValues;
     }
 }
 
@@ -11,7 +13,7 @@ exports.makeDeck = function (deckName) {
     //creates the deck
     for(let i=0; i<13; i++){
         for(let j=0; j<4; j++){
-            let newCard = new Card(cardValues[i],cardSuits[j])
+            let newCard = new Card(cardValues[i],cardSuits[j], cardValueValues[i])
             deckName.push(newCard);
         }
     }

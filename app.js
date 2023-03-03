@@ -54,24 +54,24 @@ app.get("/", function (req, res) {
 //Posts
 app.post("/", function (req, res) {
     if(req.body.hasOwnProperty("p1FirstCard-button")){
-        let playValue = p1FirstCard.value
+        let playValue = p1FirstCard.valueValues
         p1FirstCard = deck1[deck1Index];
-        deck1Index++
+        deck1Index+=playValue
     }
     if(req.body.hasOwnProperty("p1SecondCard-button")){
-        let playValue = p1SecondCard.value
+        let playValue = p1SecondCard.valueValues
         p1SecondCard = deck1[deck1Index];
-        deck1Index++
+        deck1Index+=playValue
     }
     if(req.body.hasOwnProperty("p2FirstCard-button")){
-        let playValue = p2FirstCard.value
+        let playValue = p2FirstCard.valueValues
         p2FirstCard = deck2[deck2Index];
-        deck2Index++
+        deck2Index+=playValue
     }
     if(req.body.hasOwnProperty("p2SecondCard-button")){
-        let playValue = p2SecondCard.value
+        let playValue = p2SecondCard.valueValues
         p2SecondCard = deck2[deck2Index];
-        deck2Index++
+        deck2Index+=playValue
     }
     res.redirect("/")
 });
