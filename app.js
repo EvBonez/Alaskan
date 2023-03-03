@@ -35,6 +35,9 @@ function gameStart() {
     p2FirstCard = p2Hand[0];
     p2SecondCard = p2Hand[1];
 }
+function play(){
+
+}
 
 gameStart()
 

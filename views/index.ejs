@@ -6,11 +6,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <h1><%=p1FirstCard%> <%=p1SecondCard%></h1>
-</div>
-<div>
-    <h1><%=p2FirstCard%> <%=p2SecondCard%></h1>
-</div>
+<form action="/" method="post">
+    <div class="hand row">
+        <div class="card col">
+            <h1><%=p1FirstCard%></h1>
+            <label for="p1FirstCardPlay">Play?</label>
+            <input type="checkbox" id="p1FirstCardPlay">
+        </div>
+        <div class="card col">
+            <h1><%=p1SecondCard%></h1>
+            <label for="p1SecondCardPlay">Play?</label>
+            <input type="checkbox" id="p1SecondCardPlay">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Play</button>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="/" method="post">
+    <div class="hand row">
+        <div class="card col">
+            <h1><%=p2FirstCard%></h1>
+            <label for="p2FirstCardPlay">Play?</label>
+            <input type="checkbox" id="p2FirstCardPlay">
+        </div>
+        <div class="card col">
+            <h1><%=p2SecondCard%></h1>
+            <label for="p2SecondCardPlay">Play?</label>
+            <input type="checkbox" id="p2SecondCardPlay">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Play</button>
+            </div>
+        </div>
+    </div>
+</form>
 </body>
 </html>
