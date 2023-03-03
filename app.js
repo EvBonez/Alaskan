@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const path = require("path");
 const decks = require(__dirname+"/decks.js");
+const {playCard} = require("./decks");
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -35,11 +36,9 @@ function gameStart() {
     p2FirstCard = p2Hand[0];
     p2SecondCard = p2Hand[1];
 }
-function play(){
 
-}
 
-gameStart()
+gameStart();
 
 
 //Gets
@@ -51,4 +50,30 @@ app.get("/", function (req, res) {
         p2SecondCard:p2SecondCard.value+p2SecondCard.suit,
         });
 });
+
+//Posts
+app.post("/", function (req, res) {
+    if(req.body.hasOwnProperty("p1FirstCard-button")){
+        let playValue = p1FirstCard.value
+        p1FirstCard = deck1[deck1Index];
+        deck1Index++
+    }
+    if(req.body.hasOwnProperty("p1SecondCard-button")){
+        let playValue = p1SecondCard.value
+        p1SecondCard = deck1[deck1Index];
+        deck1Index++
+    }
+    if(req.body.hasOwnProperty("p2FirstCard-button")){
+        let playValue = p2FirstCard.value
+        p2FirstCard = deck2[deck2Index];
+        deck2Index++
+    }
+    if(req.body.hasOwnProperty("p2SecondCard-button")){
+        let playValue = p2SecondCard.value
+        p2SecondCard = deck2[deck2Index];
+        deck2Index++
+    }
+    res.redirect("/")
+});
+
 app.listen(3000)
