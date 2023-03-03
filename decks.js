@@ -7,10 +7,6 @@ class Card{
     }
 }
 
-const deck1 = [];
-const deck2 = [];
-
-
 exports.makeDeck = function (deckName) {
     //creates the deck
     for(let i=0; i<13; i++){

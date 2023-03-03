@@ -7,9 +7,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
-
-var deck1Index = 0;
-var deck2Index = 0;
+//Game variables
+var deck1Index = 2;
+var deck2Index = 2;
 
 const deck1 = [];
 const deck2 = [];
@@ -17,16 +17,30 @@ const deck2 = [];
 var p1Hand = [];
 var p2Hand = [];
 
+var p1FirstCard = ""
+var p1SecondCard = ""
+
+var p2FirstCard = ""
+var p2SecondCard = ""
+
+//game logic
 function gameStart() {
     decks.makeDeck(deck1);
     decks.makeDeck(deck2);
 
     p1Hand = [deck1[0], deck1[1]];
     p2Hand = [deck2[0], deck2[1]];
-
-    console.log(p1Hand);
-    console.log(p2Hand);
+    p1FirstCard = p1Hand[0];
+    p1SecondCard = p1Hand[1];
+    p2FirstCard = p1Hand[0];
+    p2SecondCard = p1Hand[1];
 }
 
 gameStart()
+
+
+//Gets
+app.get("/", function (req, res) {
+    res.render("index",{p1FirstCard:p1FirstCard, p1SecondCard:p1SecondCard, p2FirstCard:p2FirstCard, p2SecondCard:p2SecondCard})
+})
 app.listen(3000)
