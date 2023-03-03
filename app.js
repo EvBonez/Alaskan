@@ -32,8 +32,8 @@ function gameStart() {
     p2Hand = [deck2[0], deck2[1]];
     p1FirstCard = p1Hand[0];
     p1SecondCard = p1Hand[1];
-    p2FirstCard = p1Hand[0];
-    p2SecondCard = p1Hand[1];
+    p2FirstCard = p2Hand[0];
+    p2SecondCard = p2Hand[1];
 }
 
 gameStart()
@@ -41,6 +41,11 @@ gameStart()
 
 //Gets
 app.get("/", function (req, res) {
-    res.render("index",{p1FirstCard:p1FirstCard, p1SecondCard:p1SecondCard, p2FirstCard:p2FirstCard, p2SecondCard:p2SecondCard})
-})
+    res.render("index",{
+        p1FirstCard:p1FirstCard.value+p1FirstCard.suit,
+        p1SecondCard:p1SecondCard.value+p1SecondCard.suit,
+        p2FirstCard:p2FirstCard.value+p2FirstCard.suit,
+        p2SecondCard:p2SecondCard.value+p2SecondCard.suit,
+        });
+});
 app.listen(3000)
