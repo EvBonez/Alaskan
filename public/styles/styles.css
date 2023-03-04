@@ -17,6 +17,15 @@
 .hand-card-value{
     font-size: 60px;
 }
+.p1-hand{
+    position: relative;
+    margin-left: 13%;
+}
+.p2-hand{
+    position: relative;
+    margin-right: 0;
+
+}
 .game-board{
     height: 400px;
 }

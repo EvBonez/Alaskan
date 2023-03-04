@@ -108,7 +108,7 @@ app.post("/", function (req, res) {
     }
     if(req.body.hasOwnProperty("p2ThirdCard-button")){
         let playValue = p2ThirdCard.valueValues
-        p1ThirdCard = deck2[deck2Index];
+        p2ThirdCard = deck2[deck2Index];
         deck2Index+=playValue
         deck2NumberOfCards-=playValue
     }
