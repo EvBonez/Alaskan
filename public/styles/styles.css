@@ -1,0 +1,13 @@
+.hand{
+    margin-top: 100px;
+}
+.hand-card{
+    border: black;
+    border-width: 5px;
+    border-style: inset;
+    height: auto;
+    width: auto;
+}
+.hand-card-value{
+    font-size: 60px;
+}
