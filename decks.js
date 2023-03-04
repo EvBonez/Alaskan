@@ -28,8 +28,8 @@ exports.makeDeck = function (deckName) {
     }
 
     //Adds Jokers
-    deckName.push(new Card("JOKER","JOKER"))
-    deckName.push(new Card("JOKER","JOKER"))
+    deckName.push(new Card("JOKER","JOKER","0"))
+    deckName.push(new Card("JOKER","JOKER", "0"))
 }
 
 //Draws a card after playing
