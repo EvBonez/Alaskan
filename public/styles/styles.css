@@ -1,6 +1,8 @@
 .deck{
     background-color: aquamarine;
-    margin: 10px;
+    margin: auto;
+    position: relative;
+    margin-top: 200px;
 }
 .hand{
     margin-top: 100px;
@@ -14,4 +16,7 @@
 }
 .hand-card-value{
     font-size: 60px;
+}
+.game-board{
+    height: 400px;
 }
