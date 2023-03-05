@@ -43,7 +43,7 @@ function setOmaha (hand, board){
     let  index = 0
     for(let i=0; i<6; i++){
         for(let j=0; j<10; j++){
-            possibleHands[i]= new PossibleHand(possibleHoles[i][0], possibleHoles[i][1], possibleBoards[j][0], possibleBoards[j][1], possibleBoards[j][2])
+            possibleHands[index]= new PossibleHand(possibleHoles[i][0], possibleHoles[i][1], possibleBoards[j][0], possibleBoards[j][1], possibleBoards[j][2])
             index++
         }
     }

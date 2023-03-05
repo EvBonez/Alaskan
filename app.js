@@ -66,7 +66,7 @@ function gameStart() {
 
 gameStart();
 const omahaHands = rankings.setOmaha(p1Hand, board)
-console.log(omahaHands[0].firstHole)
+console.log(omahaHands[0])
 
 //Gets
 app.get("/", function (req, res) {
