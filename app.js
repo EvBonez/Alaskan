@@ -2,7 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const path = require("path");
 const decks = require(__dirname+"/decks.js");
-const {playCard} = require("./decks");
+const rankings = require(__dirname+"/rankings.js")
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -60,11 +60,13 @@ function gameStart() {
     boardCard3 = deckBoard[3]
     boardCard4 = deckBoard[5]
     boardCard5 = deckBoard[7]
+    board = [boardCard1, boardCard2, boardCard3, boardCard4, boardCard5]
 }
 
 
 gameStart();
-
+const omahaHands = rankings.setOmaha(p1Hand, board)
+console.log(omahaHands[0].firstHole)
 
 //Gets
 app.get("/", function (req, res) {
