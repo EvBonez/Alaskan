@@ -66,7 +66,7 @@ function gameStart() {
 
 gameStart();
 const omahaHands = rankings.setOmaha(p1Hand, board)
-console.log(omahaHands[0])
+console.log(rankings.checkFlush(omahaHands))
 
 //Gets
 app.get("/", function (req, res) {

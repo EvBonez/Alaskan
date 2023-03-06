@@ -51,11 +51,17 @@ function setOmaha (hand, board){
 }
 function checkFlush(possibleHands) {
     let isFlush = false
-    for(let i=0; i<possibleHands.length; i++){
-        let clubCount = 0; let heartCount = 0; let spadeCount = 0; let diamondCount = 0
-
-    }
+    let possibleHandsLength = possibleHands.length
+    for(let i=0; i<possibleHandsLength; i++){
+        let sortedHand = []
+        sortedHand.push(possibleHands[i].firstHole.suit, possibleHands[i].secondHole.suit, possibleHands[i].firstBoard.suit, possibleHands[i].secondBoard.suit, possibleHands[i].thirdBoard.suit)
+        sortedHand = sortedHand.sort()
+        if(sortedHand[0] === sortedHand[4]){
+            isFlush = true
+        }
+    }return isFlush === true;
 }
 
 module.exports.setOmaha = setOmaha;
 module.exports.PossibleHand = PossibleHand;
+module.exports.checkFlush = checkFlush;
