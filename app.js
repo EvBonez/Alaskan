@@ -66,7 +66,9 @@ function gameStart() {
 
 gameStart();
 const omahaHands = rankings.setOmaha(p1Hand, board)
-console.log(rankings.checkFlush(omahaHands))
+console.log("S:"+rankings.checkStraight(omahaHands));
+console.log("F:"+rankings.checkFlush(omahaHands));
+console.log("P:"+rankings.checkPair(omahaHands))
 
 //Gets
 app.get("/", function (req, res) {
