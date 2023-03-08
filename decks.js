@@ -33,11 +33,3 @@ exports.makeDeck = function (deckName) {
     deckName.push(new Card("JOKER","JOKER","0", "0"))
     deckName.push(new Card("JOKER","JOKER", "0", "0"))
 }
-
-//Draws a card after playing
-exports.playCard = function (card, deck, deckIndex) {
-    if(req.body.hasOwnProperty(card+"-button")){
-        card = deck[deckIndex];
-        deckIndex++
-    }
-}
