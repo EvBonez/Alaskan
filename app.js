@@ -60,15 +60,48 @@ function gameStart() {
     boardCard3 = deckBoard[3]
     boardCard4 = deckBoard[5]
     boardCard5 = deckBoard[7]
+    /* p1FirstCard = new decks.Card("A","♣️","","14")
+    p1SecondCard = new decks.Card("K","♣️","","13")
+    p1ThirdCard = new decks.Card("Q","♣️","","12")
+    p1FourthCard = new decks.Card("10","♣️","","10")
+    p2FirstCard = new decks.Card("7","♣️","","7")
+    p2SecondCard = new decks.Card("6","♣️","","6")
+    p2ThirdCard = new decks.Card("5","♣️","","5")
+    p2FourthCard = new decks.Card("4","♣️","","4")
+    boardCard1 = new decks.Card("J","♣️","","11")
+    boardCard2 = new decks.Card("K","♣️","","13")
+    boardCard3 = new decks.Card("10","♣️","","10")
+    boardCard4 = new decks.Card("4","♣️","","4")
+    boardCard5 = new decks.Card("3","♣️","","3")
+    p1Hand = [p1FirstCard, p1SecondCard, p1ThirdCard, p1FourthCard] */
     board = [boardCard1, boardCard2, boardCard3, boardCard4, boardCard5]
 }
 
 
 gameStart();
-const omahaHands = rankings.setOmaha(p1Hand, board)
-console.log("S:"+rankings.checkStraight(omahaHands));
-console.log("F:"+rankings.checkFlush(omahaHands));
-console.log("P:"+rankings.checkPair(omahaHands))
+const omahaHandsP1 = rankings.setOmaha(p1Hand, board)
+
+const checkedFlushesP1 = rankings.checkFlush(omahaHandsP1)
+const checkedStraightsP1 = rankings.checkStraight(omahaHandsP1)
+const checkedPairsP1 = rankings.checkPair(omahaHandsP1)
+
+const omahaHandsP2 = rankings.setOmaha(p2Hand, board)
+
+const checkedFlushesP2 = rankings.checkFlush(omahaHandsP2)
+const checkedStraightsP2 = rankings.checkStraight(omahaHandsP2)
+const checkedPairsP2 = rankings.checkPair(omahaHandsP2)
+
+console.log("P1:")
+console.log("F:"+checkedFlushesP1);
+console.log("S:"+checkedStraightsP1);
+console.log("Is SF?:"+rankings.checkStraightFlush(checkedFlushesP1,checkedStraightsP1))
+console.log("P:"+checkedPairsP1);
+console.log("")
+console.log("P2:")
+console.log("F:"+checkedFlushesP2);
+console.log("S:"+checkedStraightsP2);
+console.log("Is SF?:"+rankings.checkStraightFlush(checkedFlushesP2,checkedStraightsP2))
+console.log("P:"+checkedPairsP2);
 
 //Gets
 app.get("/", function (req, res) {

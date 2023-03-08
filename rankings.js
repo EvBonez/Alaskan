@@ -52,52 +52,75 @@ function setOmaha (hand, board){
 function checkFlush(possibleHands) {
     let isFlush = false
     let possibleHandsLength = possibleHands.length
+    let flushIndexes = []
     for(let i=0; i<possibleHandsLength; i++){
         let sortedHand = []
         sortedHand.push(possibleHands[i].firstHole.suit, possibleHands[i].secondHole.suit, possibleHands[i].firstBoard.suit, possibleHands[i].secondBoard.suit, possibleHands[i].thirdBoard.suit)
         sortedHand = sortedHand.sort()
         if(sortedHand[0] === sortedHand[4]){
             isFlush = true
+            flushIndexes.push(i)
         }
-    }return isFlush === true;
+    }if (isFlush === true){
+        return flushIndexes
+    }else return false
 }
 
 function checkStraight(possibleHands){
     let isStraight = false;
     let possibleHandsLength = possibleHands.length
+    let straightIndexes = []
     for(let i=0; i<possibleHandsLength; i++){
         let sortedHand = []
         sortedHand.push(possibleHands[i].firstHole.straightOrder, possibleHands[i].secondHole.straightOrder, possibleHands[i].firstBoard.straightOrder, possibleHands[i].secondBoard.straightOrder, possibleHands[i].thirdBoard.straightOrder)
         sortedHand = sortedHand.sort()
         if (sortedHand[0] === (sortedHand[4]-4) && sortedHand[0] === (sortedHand[3]-3) && sortedHand[0] === (sortedHand[2]-2) && sortedHand[0] === (sortedHand[1]-1)){
             isStraight = true;
+            straightIndexes.push(i)
         }
-    }return isStraight === true;
+    }if (isStraight === true){
+        return straightIndexes
+    }else return false
 }
 
 function checkPair(possibleHands) {
     let isPair = false;
-    let possibleHandsLength = possibleHands.length
-    let sortedHand = []
-    let pairs = []
-    let index = 1
+    let possibleHandsLength = possibleHands.length;
+    let sortedHand = [];
+    let pairs = [];
     for (let i = 0; i < possibleHandsLength; i++) {
-        sortedHand = []
-        sortedHand.push(possibleHands[i].firstHole.straightOrder, possibleHands[i].secondHole.straightOrder, possibleHands[i].firstBoard.straightOrder, possibleHands[i].secondBoard.straightOrder, possibleHands[i].thirdBoard.straightOrder)
-        sortedHand = sortedHand.sort()
+        sortedHand = [];
+        sortedHand.push(possibleHands[i].firstHole.straightOrder, possibleHands[i].secondHole.straightOrder, possibleHands[i].firstBoard.straightOrder, possibleHands[i].secondBoard.straightOrder, possibleHands[i].thirdBoard.straightOrder);
+        sortedHand = sortedHand.sort();
         for (let k = 0; k < 4; k++) {
             if (sortedHand[k] === sortedHand[k+1]) {
-                isPair = true
+                isPair = true;
                 if (pairs.includes(sortedHand[k]) === false) {
-                    pairs.push(sortedHand[k])
+                    pairs.push(sortedHand[k]);
                 }
             }
         }
     }
-    return pairs
+    if(isPair === true){
+        return pairs;
+    }else return false
+}
+function checkStraightFlush(flushIndexes, straightIndexes) {
+    let isStraightFlush = false;
+    let flushIndexesLength = flushIndexes.length
+    let straightIndexesLength = straightIndexes.length
+    for(let i=0; i<flushIndexesLength; i++){
+        for (let j=0; j<straightIndexesLength; j++){
+            if(flushIndexes[i] === flushIndexes[j]){
+                isStraightFlush = true
+            }
+        }
+    }
+    return isStraightFlush === true;
 }
 module.exports.setOmaha = setOmaha;
 module.exports.PossibleHand = PossibleHand;
 module.exports.checkFlush = checkFlush;
 module.exports.checkStraight = checkStraight;
 module.exports.checkPair = checkPair;
+module.exports.checkStraightFlush = checkStraightFlush;

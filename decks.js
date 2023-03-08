@@ -2,6 +2,7 @@ const cardValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K",
 const cardSuits = ["♣️", "♦️", "♥️", "♠️"];
 const cardValueValues = [1,2,3,4,5,6,7,8,9,10,10,10,10]
 const straightOrder = [2,3,4,5,6,7,8,9,10,11,12,13,14]
+
 class Card{
     constructor(value, suit, valueValues, straightOrder) {
     this.value = value;
@@ -33,3 +34,5 @@ exports.makeDeck = function (deckName) {
     deckName.push(new Card("JOKER","JOKER","0", "0"))
     deckName.push(new Card("JOKER","JOKER", "0", "0"))
 }
+
+module.exports.Card = Card;
