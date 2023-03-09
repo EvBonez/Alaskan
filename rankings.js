@@ -85,25 +85,85 @@ function checkStraight(possibleHands){
 
 function checkPair(possibleHands) {
     let isPair = false;
+    let isTrips = false;
+    let isQuads = false;
+    let isPents = false
     let possibleHandsLength = possibleHands.length;
     let sortedHand = [];
-    let pairs = [];
+    let pairValues = [];
+    let pairIndexes = [];
+    let tripValues = [];
+    let tripIndexes = [];
+    let quadValues = [];
+    let quadIndexes = [];
+    let pentValues = [];
+    let pentIndexes = [];
     for (let i = 0; i < possibleHandsLength; i++) {
         sortedHand = [];
         sortedHand.push(possibleHands[i].firstHole.straightOrder, possibleHands[i].secondHole.straightOrder, possibleHands[i].firstBoard.straightOrder, possibleHands[i].secondBoard.straightOrder, possibleHands[i].thirdBoard.straightOrder);
         sortedHand = sortedHand.sort();
         for (let k = 0; k < 4; k++) {
-            if (sortedHand[k] === sortedHand[k+1]) {
-                isPair = true;
-                if (pairs.includes(sortedHand[k]) === false) {
-                    pairs.push(sortedHand[k]);
-                }
+            switch (sortedHand[k]) {
+                case sortedHand[k + 4]:
+                    isPents = true
+                    pentIndexes.push(i)
+                    pentValues.push(sortedHand[k])
+                    break
+                case sortedHand[k + 3]:
+                    isQuads = true
+                    quadIndexes.push(i)
+                    quadValues.push(sortedHand[k])
+                    break
+                case sortedHand[k + 2]:
+                    isTrips = true
+                    tripIndexes.push(i)
+                    tripValues.push(sortedHand[k])
+                    break
+                case sortedHand[k + 1]:
+                    isPair = true;
+                    pairIndexes.push(i);
+                    pairValues.push(sortedHand[k])
+                    break
+                default:
             }
         }
     }
-    if(isPair === true){
-        return pairs;
-    }else return false
+    switch (true){
+        case isPents:
+            pentValues.sort()
+            pentValues.reverse()
+            return {
+                highest: 5,
+                values: pentValues,
+                indexes: quadIndexes
+            }
+        case isQuads:
+            quadValues.sort()
+            quadValues.reverse()
+            return {
+                highest: 4,
+                values: quadValues,
+                indexes: quadIndexes
+            }
+        case isTrips:
+            tripValues.sort()
+            tripValues.reverse()
+            return {
+                highest: 3,
+                values: tripValues,
+                indexes: tripIndexes
+            }
+        case isPair:
+            pairValues.sort()
+            pairValues.reverse()
+            return {
+                highest: 2,
+                indexes: pairIndexes,
+                values: pairValues,
+            }
+        default:
+            return false
+    }
 }
 function checkStraightFlush(flushIndexes, straightIndexes) {
     let isStraightFlush = false;
@@ -118,9 +178,32 @@ function checkStraightFlush(flushIndexes, straightIndexes) {
     }
     return isStraightFlush === true;
 }
+
+function check2Pair(pairIndexes, pairValues){
+    let isTwoPair = false
+    let pairIndexesLength = pairIndexes.length
+    let index = 1
+    let highestPair = 0
+    for(let i=0; i<pairIndexesLength-1; i++){
+        for(let j=index; j<pairIndexesLength; j++){
+            if(pairIndexes[i] === pairIndexes[j]){
+                isTwoPair = true
+                if(highestPair<pairValues[i]){
+                    highestPair = pairValues[i]
+                }else if(highestPair<pairValues[j]){
+                    highestPair = pairValues[j]
+                }
+            }
+        }
+        index++
+    }if(isTwoPair === true){
+        return highestPair
+    }else return false
+}
 module.exports.setOmaha = setOmaha;
 module.exports.PossibleHand = PossibleHand;
 module.exports.checkFlush = checkFlush;
 module.exports.checkStraight = checkStraight;
 module.exports.checkPair = checkPair;
 module.exports.checkStraightFlush = checkStraightFlush;
+module.exports.check2Pair = check2Pair;
