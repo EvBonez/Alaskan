@@ -287,6 +287,24 @@ function evaluateHands(hand){
  return handStrength
 }
 
+function determineWinner(...handScores){
+    let index = 0
+    for(let i=1; i<handScores.length; i++){
+        if(handScores[i] > handScores[i-1]){
+            index = i
+        }else if(handScores[i] === handScores[i-1]){
+            index = 2
+        }
+    }
+    if (index === 0){
+        console.log("PLAYER 1 WINS")
+    }else if(index === 1){
+        console.log("PLAYER 2 WINS")
+    }else{
+        console.log("IT'S A DRAW")
+    }
+}
+
 module.exports.setOmaha = setOmaha;
 module.exports.PossibleHand = PossibleHand;
 module.exports.checkFlush = checkFlush;
@@ -295,3 +313,4 @@ module.exports.checkPair = checkPair;
 module.exports.checkStraightFlush = checkStraightFlush;
 module.exports.check2Pair = check2Pair;
 module.exports.evaluateHands = evaluateHands;
+module.exports.determineWinner = determineWinner

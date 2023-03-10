@@ -115,6 +115,8 @@ console.log("P: "+checkedPairsP2.values[0]);
 console.log("2P? "+checked2PairsP2)
 console.log("3 ,4 ,5?: "+checkedPairsP2.highest)
 console.log("Strength: "+p2HandStrength)
+console.log("")
+rankings.determineWinner(p1HandStrength, p2HandStrength)
 
 //Gets
 app.get("/", function (req, res) {
