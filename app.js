@@ -84,14 +84,19 @@ const omahaHandsP1 = rankings.setOmaha(p1Hand, board)
 const checkedFlushesP1 = rankings.checkFlush(omahaHandsP1)
 const checkedStraightsP1 = rankings.checkStraight(omahaHandsP1)
 const checkedPairsP1 = rankings.checkPair(omahaHandsP1)
-const checked2PairsP1 = rankings.check2Pair(checkedPairsP1.indexes, checkedPairsP1.values)
+const checked2PairsP1 = rankings.check2Pair(checkedPairsP1)
 
 const omahaHandsP2 = rankings.setOmaha(p2Hand, board)
 
 const checkedFlushesP2 = rankings.checkFlush(omahaHandsP2)
 const checkedStraightsP2 = rankings.checkStraight(omahaHandsP2)
 const checkedPairsP2 = rankings.checkPair(omahaHandsP2)
-const checked2PairsP2 = rankings.check2Pair(checkedPairsP2.indexes, checkedPairsP2.values)
+const checked2PairsP2 = rankings.check2Pair(checkedPairsP2)
+
+const p1HandStrength = rankings.evaluateHands(omahaHandsP1)
+const p2HandStrength = rankings.evaluateHands(omahaHandsP2)
+
+
 
 console.log("P1: ")
 console.log("F: "+checkedFlushesP1);
@@ -100,6 +105,7 @@ console.log("Is SF?: "+rankings.checkStraightFlush(checkedFlushesP1,checkedStrai
 console.log("P: "+checkedPairsP1.values[0]);
 console.log("2P?: "+checked2PairsP1)
 console.log("3, 4, 5?: "+checkedPairsP1.highest)
+console.log("Strength: "+p1HandStrength)
 console.log("")
 console.log("P2: ")
 console.log("F: "+checkedFlushesP2);
@@ -108,6 +114,7 @@ console.log("Is SF?: "+rankings.checkStraightFlush(checkedFlushesP2,checkedStrai
 console.log("P: "+checkedPairsP2.values[0]);
 console.log("2P? "+checked2PairsP2)
 console.log("3 ,4 ,5?: "+checkedPairsP2.highest)
+console.log("Strength: "+p2HandStrength)
 
 //Gets
 app.get("/", function (req, res) {

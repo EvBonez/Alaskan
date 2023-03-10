@@ -5,7 +5,9 @@ const threeOfAKind = 3
 const straight = 4
 const flush = 5
 const fullHouse = 6
-const straightFlush = 7
+const fourOfAKind = 7
+const straightFlush = 8
+const fiveOfAKind = 9
 
 class PossibleHand {
     constructor(firstHole, secondHole, firstBoard, secondBoard, thirdBoard) {
@@ -135,7 +137,7 @@ function checkPair(possibleHands) {
             return {
                 highest: 5,
                 values: pentValues,
-                indexes: quadIndexes
+                indexes: pentIndexes
             }
         case isQuads:
             quadValues.sort()
@@ -162,7 +164,11 @@ function checkPair(possibleHands) {
                 values: pairValues,
             }
         default:
-            return false
+            return {
+                highest: 0,
+                indexes: pairIndexes,
+                values: pairValues,
+            }
     }
 }
 function checkStraightFlush(flushIndexes, straightIndexes) {
@@ -179,27 +185,109 @@ function checkStraightFlush(flushIndexes, straightIndexes) {
     return isStraightFlush === true;
 }
 
-function check2Pair(pairIndexes, pairValues){
+function check2Pair(pairOutput){
     let isTwoPair = false
-    let pairIndexesLength = pairIndexes.length
+    let pairIndexesLength = pairOutput.indexes.length
+    if(pairIndexesLength === 0) {
+        return false
+    }
     let index = 1
     let highestPair = 0
     for(let i=0; i<pairIndexesLength-1; i++){
         for(let j=index; j<pairIndexesLength; j++){
-            if(pairIndexes[i] === pairIndexes[j]){
+            if(pairOutput.indexes[i] === pairOutput.indexes[j]){
                 isTwoPair = true
-                if(highestPair<pairValues[i]){
-                    highestPair = pairValues[i]
-                }else if(highestPair<pairValues[j]){
-                    highestPair = pairValues[j]
+                if(highestPair<pairOutput.values[i]){
+                    highestPair = pairOutput.values[i]
+                }else if(highestPair<pairOutput.values[j]){
+                    highestPair = pairOutput.values[j]
                 }
             }
         }
         index++
-    }if(isTwoPair === true){
+    }
+    if(isTwoPair === true){
+        console.log(highestPair)
         return highestPair
-    }else return false
+    }else {
+        return false}
 }
+
+function evaluateHands(hand){
+    let handStrength = 0
+    let possibleFlushes = checkFlush(hand)
+    let isFlush = false
+    if(possibleFlushes[0] !== undefined){
+        isFlush = true
+    }
+    let isStraight = false
+    let possibleStraights = checkStraight(hand)
+    if(possibleStraights[0] !== undefined){
+        isStraight = true
+    }
+    let isStraightFlush = false
+    let possibleStraightFlushes = checkStraightFlush(possibleFlushes, possibleStraights)
+    if (possibleStraightFlushes[0] !== undefined){
+        isStraightFlush = true
+    }
+    let possiblePairs = checkPair(hand)
+    let highestPair = possiblePairs.highest
+    let isTwoPair = false
+    let possible2Pairs = check2Pair(possiblePairs)
+    if(possible2Pairs > 0){
+        isTwoPair = true
+    }
+    let isPents = false
+    let isQuads = false
+    let isTrips = false
+    let isPair = false
+
+    switch (possiblePairs.highest){
+        case 5:
+            isPents = true
+            break
+        case 4:
+            isQuads = true
+            break
+        case 3:
+            isTrips = true
+            break
+        case 2:
+            isPair = true
+            break
+    }
+    switch (true){
+        case isPents:
+            handStrength = fiveOfAKind
+            break
+        case isStraightFlush:
+            handStrength = straightFlush
+            break
+        case isQuads:
+            handStrength = fourOfAKind
+            break
+        case isFlush:
+            handStrength = flush
+            break
+        case isStraight:
+            handStrength = straight
+            break
+        case isTrips:
+            handStrength = threeOfAKind
+            break
+        case isTwoPair:
+            handStrength = twoPair
+            break
+        case isPair:
+            handStrength = pair
+            break
+        default:
+            handStrength = highCard
+            break
+    }
+ return handStrength
+}
+
 module.exports.setOmaha = setOmaha;
 module.exports.PossibleHand = PossibleHand;
 module.exports.checkFlush = checkFlush;
@@ -207,3 +295,4 @@ module.exports.checkStraight = checkStraight;
 module.exports.checkPair = checkPair;
 module.exports.checkStraightFlush = checkStraightFlush;
 module.exports.check2Pair = check2Pair;
+module.exports.evaluateHands = evaluateHands;
