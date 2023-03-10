@@ -60,20 +60,24 @@ function gameStart() {
     boardCard3 = deckBoard[3]
     boardCard4 = deckBoard[5]
     boardCard5 = deckBoard[7]
-    /* p1FirstCard = new decks.Card("A","♣️","","14")
-    p1SecondCard = new decks.Card("K","♣️","","13")
-    p1ThirdCard = new decks.Card("Q","♣️","","12")
-    p1FourthCard = new decks.Card("10","♣️","","10")
-    p2FirstCard = new decks.Card("7","♣️","","7")
-    p2SecondCard = new decks.Card("6","♣️","","6")
-    p2ThirdCard = new decks.Card("5","♣️","","5")
-    p2FourthCard = new decks.Card("4","♣️","","4")
-    boardCard1 = new decks.Card("J","♣️","","11")
-    boardCard2 = new decks.Card("K","♣️","","13")
-    boardCard3 = new decks.Card("10","♣️","","10")
-    boardCard4 = new decks.Card("4","♣️","","4")
-    boardCard5 = new decks.Card("3","♣️","","3")
-    p1Hand = [p1FirstCard, p1SecondCard, p1ThirdCard, p1FourthCard] */
+
+    /* Test Case
+    p1FirstCard = new decks.Card("A","♣️",14,14)
+    p1SecondCard = new decks.Card("K","♣️","13",13)
+    p1ThirdCard = new decks.Card("Q","♣️","12",12)
+    p1FourthCard = new decks.Card("10","♣️","10",10)
+    p2FirstCard = new decks.Card("7","♣️","7",7)
+    p2SecondCard = new decks.Card("6","♣️","6",6)
+    p2ThirdCard = new decks.Card("5","♣️","5",5)
+    p2FourthCard = new decks.Card("4","♣️","4",4)
+    boardCard1 = new decks.Card("J","♣️","11",11)
+    boardCard2 = new decks.Card("K","♣️","13",13)
+    boardCard3 = new decks.Card("10","♣️","10",10)
+    boardCard4 = new decks.Card("4","♣️","4",4)
+    boardCard5 = new decks.Card("3","♣️","3",3)
+    p1Hand = [p1FirstCard, p1SecondCard, p1ThirdCard, p1FourthCard]
+    p2Hand = [p2FirstCard, p2SecondCard, p2ThirdCard, p2FourthCard]*/
+
     board = [boardCard1, boardCard2, boardCard3, boardCard4, boardCard5]
 }
 
