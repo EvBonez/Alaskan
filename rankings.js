@@ -52,6 +52,26 @@ function setOmaha (hand, board){
     }
     return possibleHands
 }
+function setHoldem(hand, board){
+    let possibleHoles = [hand[0], hand[1]]
+    let possibleBoards = []
+    possibleBoards[0] = [board[0], board[1], board[2]];
+    possibleBoards[1] = [board[0], board[1], board[3]];
+    possibleBoards[2] = [board[0], board[1], board[4]];
+    possibleBoards[3] = [board[0], board[2], board[3]];
+    possibleBoards[4] = [board[0], board[2], board[4]];
+    possibleBoards[5] = [board[0], board[3], board[4]];
+    possibleBoards[6] = [board[1], board[2], board[3]];
+    possibleBoards[7] = [board[1], board[2], board[4]];
+    possibleBoards[8] = [board[1], board[3], board[4]];
+    possibleBoards[9] = [board[2], board[3], board[4]];
+
+    let possibleHands = []
+    for(let j=0; j<10; j++){
+        possibleHands[j]= new PossibleHand(possibleHoles[0], possibleHoles[1], possibleBoards[j][0], possibleBoards[j][1], possibleBoards[j][2])
+    }
+    return possibleHands
+}
 function checkFlush(possibleHands) {
     let isFlush = false
     let possibleHandsLength = possibleHands.length
@@ -337,6 +357,7 @@ function determineWinner(...handScores){
 }
 
 module.exports.setOmaha = setOmaha;
+module.exports.setHoldem = setHoldem;
 module.exports.PossibleHand = PossibleHand;
 module.exports.checkFlush = checkFlush;
 module.exports.checkStraight = checkStraight;
