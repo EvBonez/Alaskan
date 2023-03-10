@@ -207,7 +207,6 @@ function check2Pair(pairOutput){
         index++
     }
     if(isTwoPair === true){
-        console.log(highestPair)
         return highestPair
     }else {
         return false}
