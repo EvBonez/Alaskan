@@ -104,7 +104,6 @@ console.log("S: "+checkedStraightsP1);
 console.log("Is SF?: "+rankings.checkStraightFlush(checkedFlushesP1,checkedStraightsP1))
 console.log("P: "+checkedPairsP1.values[0]);
 console.log("2P?: "+checked2PairsP1)
-console.log("3, 4, 5?: "+checkedPairsP1.highest)
 console.log("Strength: "+p1HandStrength)
 console.log("")
 console.log("P2: ")
@@ -113,7 +112,6 @@ console.log("S: "+checkedStraightsP2);
 console.log("Is SF?: "+rankings.checkStraightFlush(checkedFlushesP2,checkedStraightsP2))
 console.log("P: "+checkedPairsP2.values[0]);
 console.log("2P? "+checked2PairsP2)
-console.log("3 ,4 ,5?: "+checkedPairsP2.highest)
 console.log("Strength: "+p2HandStrength)
 console.log("")
 rankings.determineWinner(p1HandStrength, p2HandStrength)

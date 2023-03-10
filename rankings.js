@@ -1,3 +1,4 @@
+const punycode = require("punycode");
 const highCard = 0
 const pair = 1
 const twoPair = 2
@@ -90,6 +91,7 @@ function checkPair(possibleHands) {
     let isTrips = false;
     let isQuads = false;
     let isPents = false
+    let isFullHouse = false;
     let possibleHandsLength = possibleHands.length;
     let sortedHand = [];
     let pairValues = [];
@@ -100,6 +102,8 @@ function checkPair(possibleHands) {
     let quadIndexes = [];
     let pentValues = [];
     let pentIndexes = [];
+    let boatValues = [];
+    let boatIndexes = [];
     for (let i = 0; i < possibleHandsLength; i++) {
         sortedHand = [];
         sortedHand.push(possibleHands[i].firstHole.straightOrder, possibleHands[i].secondHole.straightOrder, possibleHands[i].firstBoard.straightOrder, possibleHands[i].secondBoard.straightOrder, possibleHands[i].thirdBoard.straightOrder);
@@ -130,12 +134,23 @@ function checkPair(possibleHands) {
             }
         }
     }
+    let tripIndexesLength = tripIndexes.length
+    for(let i=0; i<tripIndexesLength; i++){
+        sortedHand = []
+        sortedHand.push(possibleHands[tripIndexes[i]].firstHole.straightOrder, possibleHands[tripIndexes[i]].secondHole.straightOrder, possibleHands[tripIndexes[i]].firstBoard.straightOrder, possibleHands[tripIndexes[i]].secondBoard.straightOrder, possibleHands[tripIndexes[i]].thirdBoard.straightOrder);
+        sortedHand = sortedHand.sort();
+        if(sortedHand[0] === sortedHand[1] && sortedHand[3] === sortedHand[4]){
+            boatValues.push(sortedHand[0])
+            boatIndexes.push(i)
+            isFullHouse = true
+        }
+    }
     switch (true){
         case isPents:
             pentValues.sort()
             pentValues.reverse()
             return {
-                highest: 5,
+                highest: 6,
                 values: pentValues,
                 indexes: pentIndexes
             }
@@ -143,9 +158,17 @@ function checkPair(possibleHands) {
             quadValues.sort()
             quadValues.reverse()
             return {
-                highest: 4,
+                highest: 5,
                 values: quadValues,
                 indexes: quadIndexes
+            }
+        case isFullHouse:
+            boatValues.sort()
+            boatValues.reverse()
+            return {
+                highest: 4,
+                values: boatValues,
+                indexes: boatIndexes
             }
         case isTrips:
             tripValues.sort()
@@ -177,7 +200,7 @@ function checkStraightFlush(flushIndexes, straightIndexes) {
     let straightIndexesLength = straightIndexes.length
     for(let i=0; i<flushIndexesLength; i++){
         for (let j=0; j<straightIndexesLength; j++){
-            if(flushIndexes[i] === flushIndexes[j]){
+            if(flushIndexes[i] === straightIndexes[j]){
                 isStraightFlush = true
             }
         }
@@ -226,11 +249,11 @@ function evaluateHands(hand){
     }
     let isStraightFlush = false
     let possibleStraightFlushes = checkStraightFlush(possibleFlushes, possibleStraights)
-    if (possibleStraightFlushes[0] !== undefined){
+    if (possibleStraightFlushes === true){
         isStraightFlush = true
     }
     let possiblePairs = checkPair(hand)
-    let highestPair = possiblePairs.highest
+    let isBoat = false
     let isTwoPair = false
     let possible2Pairs = check2Pair(possiblePairs)
     if(possible2Pairs > 0){
@@ -242,17 +265,22 @@ function evaluateHands(hand){
     let isPair = false
 
     switch (possiblePairs.highest){
-        case 5:
+        case 6:
             isPents = true
             break
-        case 4:
+        case 5:
             isQuads = true
+            break
+        case 4:
+            isBoat = true
             break
         case 3:
             isTrips = true
             break
         case 2:
             isPair = true
+            break
+        default:
             break
     }
     switch (true){
@@ -264,6 +292,9 @@ function evaluateHands(hand){
             break
         case isQuads:
             handStrength = fourOfAKind
+            break
+        case isBoat:
+            handStrength = fullHouse
             break
         case isFlush:
             handStrength = flush
